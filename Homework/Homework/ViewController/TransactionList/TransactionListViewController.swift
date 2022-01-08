@@ -17,6 +17,7 @@ class TransactionListViewController: UIViewController {
         let tableView = UITableView(frame: CGRect.zero, style: UITableView.Style.plain)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(TransactionListDetailTableViewCell.self, forCellReuseIdentifier: TransactionListDetailTableViewCell.identifier)
         return tableView
     }()
 
@@ -32,6 +33,17 @@ class TransactionListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initView()
+        viewModel.getTransactionListViewObjects().subscribe { result in
+            switch result {
+            case .success(let object):
+
+                self.viewObject = object
+                self.tableView.reloadData()
+
+            case .failure(let error):
+                print(error)
+            }
+        }.disposed(by: viewModel.disposeBag)
     }
 
     private func initView() {
@@ -52,6 +64,7 @@ extension TransactionListViewController: UITableViewDelegate, UITableViewDataSou
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let cellCount = self.viewObject?.sections[section].cells.count ?? 0
+        print(cellCount)
         return cellCount
     }
 
@@ -60,8 +73,10 @@ extension TransactionListViewController: UITableViewDelegate, UITableViewDataSou
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        #warning("DOTO: TransactionListDetailTableViewCell")
-        return .init()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TransactionListDetailTableViewCell.identifier, for: indexPath) as? TransactionListDetailTableViewCell else { return UITableViewCell() }
+        guard let viewObject = viewObject else { return UITableViewCell()}
+        cell.updateView(viewObject.sections[indexPath.section].cells[indexPath.row])
+        return cell
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -69,10 +84,12 @@ extension TransactionListViewController: UITableViewDelegate, UITableViewDataSou
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        #warning("DOTO: TransactionListSectionView")
+        if let viewObject = viewObject {
+            let sectionView = TransactionListSectionView(frame: tableView.rectForHeader(inSection: section), transactionListItemViewObject:  viewObject.sections[section])
+            return sectionView
+        }
         return nil
     }
     
-
 }
 

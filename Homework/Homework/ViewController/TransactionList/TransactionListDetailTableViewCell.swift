@@ -9,6 +9,8 @@ import UIKit
 
 class TransactionListDetailTableViewCell: UITableViewCell {
 
+    static var identifier = "TransactionListDetailTableViewCell"
+
     private lazy var nameLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.numberOfLines = 1

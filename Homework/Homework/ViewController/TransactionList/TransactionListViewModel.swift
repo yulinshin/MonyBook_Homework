@@ -18,7 +18,20 @@ class TransactionListViewModel {
     func getTransactionListViewObjects() -> Single<TransactionListViewObject> {
         return apiManager.getTransactions().map { (transactions) -> TransactionListViewObject in
             #warning("DOTO: make TransactionListViewObject then sort sections by time")
-            return .init(sum: 0, sections: [])
+            var sum = 0
+            var sections = [TransactionListSectionViewObject]()
+            transactions.forEach { transaction in
+                var cells = [TransactionListCellViewObject]()
+                transaction.details?.forEach({ transactionDetail in
+                    let cellViewObject = TransactionListCellViewObject(name: transactionDetail.name, priceWithQuantity: "Price:\(transactionDetail.price)Quantiy:\(transactionDetail.quantity) ")
+                    sum += transactionDetail.price * transactionDetail.quantity
+                    cells.append(cellViewObject)
+                })
+                sections.append(TransactionListSectionViewObject(title: transaction.title, time: "\(transaction.time)", cells: cells))
+
+                sections.sort(by: { return $0.time < $1.time })
+            }
+            return .init(sum: sum, sections: sections)
         }.observe(on: MainScheduler.instance)
     }
 
