@@ -18,6 +18,10 @@ class TransactionListViewModel {
     func getTransactionListViewObjects() -> Single<TransactionListViewObject> {
         return apiManager.getTransactions().map { (transactions) -> TransactionListViewObject in
             #warning("DOTO: make TransactionListViewObject then sort sections by time")
+            if DBManager.sharedInstance.createDatabase() {
+                DBManager.sharedInstance.insertTransactionData(transactions: transactions)
+            }
+
             var sum = 0
             var sections = [TransactionListSectionViewObject]()
             transactions.forEach { transaction in
@@ -31,8 +35,8 @@ class TransactionListViewModel {
 
                 sections.sort(by: { return $0.time < $1.time })
             }
+
             return .init(sum: sum, sections: sections)
         }.observe(on: MainScheduler.instance)
     }
-
 }

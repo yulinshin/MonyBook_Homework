@@ -90,6 +90,14 @@ extension TransactionListViewController: UITableViewDelegate, UITableViewDataSou
         }
         return nil
     }
-    
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        let nav = UINavigationController(rootViewController: self)
+        let detailVC = TransactionDetailViewController()
+        nav.pushViewController(detailVC, animated: true)
+
+    }
+
 }
 

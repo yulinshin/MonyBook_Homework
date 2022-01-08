@@ -34,6 +34,7 @@
 		0DE77A982644FA010068A3CE /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE77A972644FA010068A3CE /* DBManager.swift */; };
 		0DE77A9E2644FB6A0068A3CE /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = 0DE77A9D2644FB6A0068A3CE /* FMDB */; };
 		0DE77AA32644FC930068A3CE /* TransactionListViewObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE77AA22644FC930068A3CE /* TransactionListViewObject.swift */; };
+		62EC52A82789CF6E00C75343 /* TransactionDetailViewObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EC52A72789CF6E00C75343 /* TransactionDetailViewObject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		0DE77A922644F8750068A3CE /* TransactionDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailTableViewCell.swift; sourceTree = "<group>"; };
 		0DE77A972644FA010068A3CE /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		0DE77AA22644FC930068A3CE /* TransactionListViewObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListViewObject.swift; sourceTree = "<group>"; };
+		62EC52A72789CF6E00C75343 /* TransactionDetailViewObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewObject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +241,7 @@
 			children = (
 				0DE77A8A2644F7140068A3CE /* TransactionDetailViewController.swift */,
 				0DE77A922644F8750068A3CE /* TransactionDetailTableViewCell.swift */,
+				62EC52A72789CF6E00C75343 /* TransactionDetailViewObject.swift */,
 			);
 			path = TransactionDetail;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				0D86F3342643A80F00C0F731 /* APIManager.swift in Sources */,
 				0D6E57ED2643C01500E3E72C /* Transaction.swift in Sources */,
 				0D6E57FA2643CFD900E3E72C /* TransactionListDetailTableViewCell.swift in Sources */,
+				62EC52A82789CF6E00C75343 /* TransactionDetailViewObject.swift in Sources */,
 				0DE77A8B2644F7140068A3CE /* TransactionDetailViewController.swift in Sources */,
 				0D6E57F52643CF9300E3E72C /* TransactionListSectionView.swift in Sources */,
 				0D86F2EF2643A18700C0F731 /* TransactionListViewController.swift in Sources */,
