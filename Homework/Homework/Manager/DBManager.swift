@@ -48,9 +48,9 @@ class DBManager: NSObject {
                 // Open the database.
                 if database.open() {
 
-                    let createTransactionDetailTableQuery = "create table transactionDetail (\(field_id) integer primary key autoincrement not null, \(field_transactionId) integer not null, \(field_name) text not null, \(field_quantity) integer not null, \(field_price) integer not null)"
+                    let createTransactionDetailTableQuery = "create table transactionDetail (\(field_id) text primary key not null, \(field_transactionId) integer not null, \(field_name) text not null, \(field_quantity) integer not null, \(field_price) integer not null)"
 
-                    let createTransactionTableQuery = "create table transactions (\(field_id) integer primary key not null, \(field_title) text not null, \(field_time) text not null, \(field_description) text not null)"
+                    let createTransactionTableQuery = "create table transactions (\(field_id) integer   primary key not null, \(field_title) text not null, \(field_time) text not null, \(field_description) text not null)"
 
                     do {
                         try database.executeUpdate(createTransactionDetailTableQuery, values: nil)
@@ -103,7 +103,7 @@ class DBManager: NSObject {
 
             var query = ""
             for transaction in transactions {
-                query += "insert into movies (\(field_id), \(field_title), \(field_time), \(field_description)) values (\(transaction.id), '\(transaction.title)', '\(transaction.time)', \(transaction.description));"
+                query += "insert into transactions (\(field_id), \(field_title), \(field_time), \(field_description)) values (\(transaction.id), '\(transaction.title)', '\(transaction.time)', '\(transaction.description)');"
                 if let transactionDetail = transaction.details {
                     insertTransactionDetailData(transactionId: transaction.id, transactionDetail: transactionDetail)
                 }
@@ -123,7 +123,7 @@ class DBManager: NSObject {
             var query = ""
             for transactionDetail in transactionDetail {
 
-                query += "insert into transactionDetail (\(field_id), \(field_transactionId), \(field_name), \(field_quantity), \(field_price)) values (null, '\(transactionId)', '\(transactionDetail.name)', '\(transactionDetail.quantity)', \(transactionDetail.price));"
+                query += "insert into transactionDetail (\(field_id), \(field_transactionId), \(field_name), \(field_quantity), \(field_price)) values ('\(transactionId)\(transactionDetail.name)', '\(transactionId)', '\(transactionDetail.name)', '\(transactionDetail.quantity)', \(transactionDetail.price));"
 
             }
 
@@ -166,6 +166,33 @@ class DBManager: NSObject {
         return transactions
     }
 
+    func loadTransaction(transactionId: Int) -> Single<Transaction> {
+
+        var transaction: Transaction!
+
+        if openDatabase() {
+            let query = "select * from transactions where \(field_id)=?"
+
+            do {
+                print(database)
+                let results = try database.executeQuery(query, values: [transactionId])
+
+                while results.next() {
+
+                    transaction = Transaction(id: Int(results.int(forColumn: field_id)), time: Int(results.int(forColumn: field_time)), title: results.string(forColumn: field_title)!, description: results.string(forColumn: field_description)!, details: loadTransactionDetails(transactionId: transactionId))
+
+                }
+            }
+            catch {
+                return Single.error(error)
+            }
+
+            database.close()
+
+        }
+
+        return Single<Transaction>.just(transaction)
+    }
 
 
     func loadTransactionDetails(transactionId: Int) -> [TransactionDetail]! {

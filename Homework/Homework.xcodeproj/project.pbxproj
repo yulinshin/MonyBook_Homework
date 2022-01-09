@@ -35,6 +35,7 @@
 		0DE77A9E2644FB6A0068A3CE /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = 0DE77A9D2644FB6A0068A3CE /* FMDB */; };
 		0DE77AA32644FC930068A3CE /* TransactionListViewObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE77AA22644FC930068A3CE /* TransactionListViewObject.swift */; };
 		62EC52A82789CF6E00C75343 /* TransactionDetailViewObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EC52A72789CF6E00C75343 /* TransactionDetailViewObject.swift */; };
+		62EC52AA2789F07D00C75343 /* TransactionDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EC52A92789F07D00C75343 /* TransactionDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		0DE77A972644FA010068A3CE /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		0DE77AA22644FC930068A3CE /* TransactionListViewObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListViewObject.swift; sourceTree = "<group>"; };
 		62EC52A72789CF6E00C75343 /* TransactionDetailViewObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewObject.swift; sourceTree = "<group>"; };
+		62EC52A92789F07D00C75343 /* TransactionDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +244,7 @@
 				0DE77A8A2644F7140068A3CE /* TransactionDetailViewController.swift */,
 				0DE77A922644F8750068A3CE /* TransactionDetailTableViewCell.swift */,
 				62EC52A72789CF6E00C75343 /* TransactionDetailViewObject.swift */,
+				62EC52A92789F07D00C75343 /* TransactionDetailViewModel.swift */,
 			);
 			path = TransactionDetail;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62EC52AA2789F07D00C75343 /* TransactionDetailViewModel.swift in Sources */,
 				0D86F3392643A90800C0F731 /* Inject.swift in Sources */,
 				0DE77A932644F8750068A3CE /* TransactionDetailTableViewCell.swift in Sources */,
 				0D86F3342643A80F00C0F731 /* APIManager.swift in Sources */,

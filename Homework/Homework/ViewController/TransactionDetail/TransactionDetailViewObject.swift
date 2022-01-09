@@ -8,6 +8,8 @@
 import Foundation
 
 struct TransactionDetailViewObject {
-    let sum: Int
-    let sections: [TransactionListSectionViewObject]
+    let title: String
+    let time: String
+    let description: String
+    let cells: [TransactionListCellViewObject]
 }

@@ -13,6 +13,7 @@ struct TransactionListViewObject {
 }
 
 struct TransactionListSectionViewObject {
+    let id: Int
     let title: String
     let time: String; #warning("DOTO: format -> 109/10/01")
     let cells: [TransactionListCellViewObject]

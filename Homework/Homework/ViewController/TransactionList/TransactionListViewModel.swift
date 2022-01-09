@@ -20,6 +20,8 @@ class TransactionListViewModel {
             #warning("DOTO: make TransactionListViewObject then sort sections by time")
             if DBManager.sharedInstance.createDatabase() {
                 DBManager.sharedInstance.insertTransactionData(transactions: transactions)
+            }else{
+                DBManager.sharedInstance.insertTransactionData(transactions: transactions)
             }
 
             var sum = 0
@@ -31,7 +33,7 @@ class TransactionListViewModel {
                     sum += transactionDetail.price * transactionDetail.quantity
                     cells.append(cellViewObject)
                 })
-                sections.append(TransactionListSectionViewObject(title: transaction.title, time: "\(transaction.time)", cells: cells))
+                sections.append(TransactionListSectionViewObject(id: transaction.id, title: transaction.title, time: "\(transaction.time)", cells: cells))
 
                 sections.sort(by: { return $0.time < $1.time })
             }

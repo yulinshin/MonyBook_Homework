@@ -93,11 +93,11 @@ extension TransactionListViewController: UITableViewDelegate, UITableViewDataSou
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let nav = UINavigationController(rootViewController: self)
-        let detailVC = TransactionDetailViewController()
-        nav.pushViewController(detailVC, animated: true)
+        let detailVC = TransactionDetailViewController(viewModel: TransactionDetailViewModel(transactionId: viewObject!.sections[indexPath.section].id ))
+        self.navigationController?.pushViewController(detailVC, animated: true)
 
     }
+
 
 }
 
