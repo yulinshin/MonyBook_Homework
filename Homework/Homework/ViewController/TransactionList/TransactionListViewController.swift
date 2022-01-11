@@ -33,17 +33,8 @@ class TransactionListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initView()
-        viewModel.getTransactionListViewObjects().subscribe { result in
-            switch result {
-            case .success(let object):
-
-                self.viewObject = object
-                self.tableView.reloadData()
-
-            case .failure(let error):
-                print(error)
-            }
-        }.disposed(by: viewModel.disposeBag)
+        setupNavBar()
+        updateData()
     }
 
     private func initView() {
@@ -51,6 +42,41 @@ class TransactionListViewController: UIViewController {
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+    }
+
+    private func setupNavBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Refresh", style: .plain, target: self, action: #selector(refreshTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTapped))
+    }
+
+    @objc func refreshTapped() {
+        updateData()
+    }
+
+    @objc func addTapped() {
+       print("add")
+    }
+
+   private func updateData(){
+        viewModel.getTransactionListViewObjects().subscribe { result in
+            switch result {
+            case .success(let object):
+
+                self.viewObject = object
+                self.title = "Total: \(object.sum)"
+                self.tableView.reloadData()
+
+            case .failure:
+                self.viewObject =  self.viewModel.getTransactionListViewObjectsFromLocal()
+                if let object = self.viewObject {
+                    self.title = "Total: \(object.sum)"
+                } else {
+                    self.title = "Total: -"
+                }
+
+                self.tableView.reloadData()
+            }
+        }.disposed(by: viewModel.disposeBag)
     }
 
 }

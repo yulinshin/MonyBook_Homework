@@ -134,7 +134,7 @@ class DBManager: NSObject {
         }
     }
 
-    func loadTransactions() -> [Transaction]! {
+    func loadTransactions() -> [Transaction] {
 
         var transactions: [Transaction]!
 
@@ -157,12 +157,13 @@ class DBManager: NSObject {
                 }
             }
             catch {
-                print(error.localizedDescription)
+              print(error)
             }
 
-            database.close()
         }
-
+        if transactions == nil {
+            transactions = [Transaction]()
+        }
         return transactions
     }
 
@@ -186,8 +187,6 @@ class DBManager: NSObject {
             catch {
                 return Single.error(error)
             }
-
-            database.close()
 
         }
 
@@ -222,7 +221,6 @@ class DBManager: NSObject {
                 print(error.localizedDescription)
             }
 
-            database.close()
         }
 
         return transactionDetails
