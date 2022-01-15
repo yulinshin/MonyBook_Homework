@@ -34,6 +34,10 @@
 		0DE77A982644FA010068A3CE /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE77A972644FA010068A3CE /* DBManager.swift */; };
 		0DE77A9E2644FB6A0068A3CE /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = 0DE77A9D2644FB6A0068A3CE /* FMDB */; };
 		0DE77AA32644FC930068A3CE /* TransactionListViewObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE77AA22644FC930068A3CE /* TransactionListViewObject.swift */; };
+		626432F92792FA48008A27F2 /* InsertTransactionViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626432F82792FA48008A27F2 /* InsertTransactionViewTableViewCell.swift */; };
+		626432FB2792FBFB008A27F2 /* InsertTransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626432FA2792FBFB008A27F2 /* InsertTransactionViewModel.swift */; };
+		626432FF27931941008A27F2 /* InsertTransctionViewTableViewButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626432FE27931941008A27F2 /* InsertTransctionViewTableViewButtonCell.swift */; };
+		6264330127932209008A27F2 /* TransactionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6264330027932209008A27F2 /* TransactionRequest.swift */; };
 		62EC52A82789CF6E00C75343 /* TransactionDetailViewObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EC52A72789CF6E00C75343 /* TransactionDetailViewObject.swift */; };
 		62EC52AA2789F07D00C75343 /* TransactionDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EC52A92789F07D00C75343 /* TransactionDetailViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -81,6 +85,10 @@
 		0DE77A922644F8750068A3CE /* TransactionDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailTableViewCell.swift; sourceTree = "<group>"; };
 		0DE77A972644FA010068A3CE /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		0DE77AA22644FC930068A3CE /* TransactionListViewObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListViewObject.swift; sourceTree = "<group>"; };
+		626432F82792FA48008A27F2 /* InsertTransactionViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertTransactionViewTableViewCell.swift; sourceTree = "<group>"; };
+		626432FA2792FBFB008A27F2 /* InsertTransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertTransactionViewModel.swift; sourceTree = "<group>"; };
+		626432FE27931941008A27F2 /* InsertTransctionViewTableViewButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertTransctionViewTableViewButtonCell.swift; sourceTree = "<group>"; };
+		6264330027932209008A27F2 /* TransactionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRequest.swift; sourceTree = "<group>"; };
 		62EC52A72789CF6E00C75343 /* TransactionDetailViewObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewObject.swift; sourceTree = "<group>"; };
 		62EC52A92789F07D00C75343 /* TransactionDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -234,6 +242,9 @@
 			isa = PBXGroup;
 			children = (
 				0DE77A7D2644F6E70068A3CE /* InsertTransactionViewController.swift */,
+				626432F82792FA48008A27F2 /* InsertTransactionViewTableViewCell.swift */,
+				626432FA2792FBFB008A27F2 /* InsertTransactionViewModel.swift */,
+				626432FE27931941008A27F2 /* InsertTransctionViewTableViewButtonCell.swift */,
 			);
 			path = InsertTransaction;
 			sourceTree = "<group>";
@@ -252,6 +263,7 @@
 		0DE77AA72644FDBD0068A3CE /* Request */ = {
 			isa = PBXGroup;
 			children = (
+				6264330027932209008A27F2 /* TransactionRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -420,18 +432,22 @@
 			files = (
 				62EC52AA2789F07D00C75343 /* TransactionDetailViewModel.swift in Sources */,
 				0D86F3392643A90800C0F731 /* Inject.swift in Sources */,
+				626432FB2792FBFB008A27F2 /* InsertTransactionViewModel.swift in Sources */,
 				0DE77A932644F8750068A3CE /* TransactionDetailTableViewCell.swift in Sources */,
 				0D86F3342643A80F00C0F731 /* APIManager.swift in Sources */,
 				0D6E57ED2643C01500E3E72C /* Transaction.swift in Sources */,
 				0D6E57FA2643CFD900E3E72C /* TransactionListDetailTableViewCell.swift in Sources */,
 				62EC52A82789CF6E00C75343 /* TransactionDetailViewObject.swift in Sources */,
+				626432FF27931941008A27F2 /* InsertTransctionViewTableViewButtonCell.swift in Sources */,
 				0DE77A8B2644F7140068A3CE /* TransactionDetailViewController.swift in Sources */,
 				0D6E57F52643CF9300E3E72C /* TransactionListSectionView.swift in Sources */,
+				6264330127932209008A27F2 /* TransactionRequest.swift in Sources */,
 				0D86F2EF2643A18700C0F731 /* TransactionListViewController.swift in Sources */,
 				0D86F33E2643A91C00C0F731 /* Resolver.swift in Sources */,
 				0D86F2EB2643A18700C0F731 /* AppDelegate.swift in Sources */,
 				0D6E57CD2643AD5200E3E72C /* TransactionListViewModel.swift in Sources */,
 				0D86F2ED2643A18700C0F731 /* SceneDelegate.swift in Sources */,
+				626432F92792FA48008A27F2 /* InsertTransactionViewTableViewCell.swift in Sources */,
 				0DE77A7E2644F6E70068A3CE /* InsertTransactionViewController.swift in Sources */,
 				0DE77A982644FA010068A3CE /* DBManager.swift in Sources */,
 				0DE77AA32644FC930068A3CE /* TransactionListViewObject.swift in Sources */,

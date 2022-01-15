@@ -63,10 +63,12 @@ class TransactionDetailViewController: UIViewController {
                 self.titleLabel.text = object.title
                 self.descriptionLabel.text = object.description
                 self.detailTableView.reloadData()
+                self.navigationItem.title = "\(object.title) Detail"
             case .failure(let error):
                 print(error)
             }
         }.disposed(by: viewModel.disposeBag)
+
     }
 
     private func initView() {

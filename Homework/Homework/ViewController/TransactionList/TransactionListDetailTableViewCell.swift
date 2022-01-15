@@ -46,9 +46,9 @@ class TransactionListDetailTableViewCell: UITableViewCell {
     }
 
 
-    func updateView(_ viewOject: TransactionListCellViewObject) {
-        priceLabel.text = viewOject.priceWithQuantity
-        nameLabel.text = viewOject.name
+    func updateView(_ viewOject: TransactionListCellViewObject?) {
+        priceLabel.text = viewOject?.priceWithQuantity
+        nameLabel.text = viewOject?.name
     }
 
 }

@@ -47,6 +47,7 @@ class TransactionListViewController: UIViewController {
     private func setupNavBar() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Refresh", style: .plain, target: self, action: #selector(refreshTapped))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTapped))
+        navigationItem.backButtonTitle = "Back to list"
     }
 
     @objc func refreshTapped() {
@@ -54,7 +55,10 @@ class TransactionListViewController: UIViewController {
     }
 
     @objc func addTapped() {
-       print("add")
+
+        let insertVC = InsertTransactionViewController()
+        self.navigationController?.pushViewController(insertVC, animated: true)
+
     }
 
    private func updateData(){
