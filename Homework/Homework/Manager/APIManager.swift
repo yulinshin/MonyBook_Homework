@@ -22,6 +22,14 @@ class APIManager {
         }
     }
 
+    func postTransactions(data: TransactionRequest) -> Single<Transaction> {
+        return post(data: data).flatMap { (data) -> Single<Transaction> in
+            return APIManager.handleDecode(Transaction.self, from: data)
+        }
+    }
+
+
+
     public enum DecodeError: Error, LocalizedError {
         case dataNull
         public var errorDescription: String? {
@@ -58,6 +66,26 @@ class APIManager {
                     singleEvent(.failure(error))
                 }
             }
+            return Disposables.create()
+        }
+
+    }
+
+    private func post<T:Encodable>(data: T) -> Single<Data?> {
+        return Single<Data?>.create { (singleEvent) -> Disposable in
+
+            Alamofire.Session.default.request(APIManager.host + APIManager.transaction, method: .post, parameters: data, encoder: JSONParameterEncoder.default , headers: nil).responseJSON  { (response) in
+                switch response.result {
+                case .success:
+                    if let jsonData = response.data , let JSONString = String(data: jsonData, encoding: String.Encoding.utf8) {
+                       print("JSONString = " + JSONString)
+                    }
+                    singleEvent(.success(response.data))
+                case .failure(let error):
+                    singleEvent(.failure(error))
+                }
+            }
+
             return Disposables.create()
         }
 

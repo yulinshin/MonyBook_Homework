@@ -23,7 +23,6 @@ class InsertTransactionViewModel {
     let descriptionRelay = BehaviorRelay<String>(value: "")
 
 
-
     enum Section: CaseIterable {
 
         case time
@@ -56,6 +55,9 @@ class InsertTransactionViewModel {
 
     var disposeBag:DisposeBag = .init()
 
+    @Inject private var apiManager: APIManager
+    @Inject private var dbManager: DBManager
+
     init() {
         details = detailsRelay.asObservable().map({ details in
  var viewObjects = [TransactionListCellViewObject]()
@@ -74,10 +76,13 @@ class InsertTransactionViewModel {
         self.detailsRelay.accept(detailsRelay.value + [detail])
     }
 
-    func saveTransaction() {
-
-        print ( packObjectToData())
-
+    func saveTransaction(){
+        let data = packObjectToData()
+        apiManager.postTransactions(data: data).subscribe(onSuccess: { transaction in
+            self.dbManager.insertTransactionData(transactions:[ transaction])
+        }, onFailure: { error in
+            print(error)
+        }).disposed(by: disposeBag)
     }
 
     private func packObjectToData() -> TransactionRequest {
@@ -90,5 +95,7 @@ class InsertTransactionViewModel {
         let transactionRequest = TransactionRequest(time: dateInt, title: titleRelay.value, description: descriptionRelay.value, details: detailsRelay.value)
         return transactionRequest
     }
+
+
 
 }

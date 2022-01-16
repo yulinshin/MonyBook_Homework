@@ -100,17 +100,16 @@ class DBManager: NSObject {
 
     func insertTransactionData(transactions: [Transaction]) {
         if openDatabase() {
-
             var query = ""
             for transaction in transactions {
-                query += "insert into transactions (\(field_id), \(field_title), \(field_time), \(field_description)) values (\(transaction.id), '\(transaction.title)', '\(transaction.time)', '\(transaction.description)');"
+                query += "insert or replace into transactions (\(field_id), \(field_title), \(field_time), \(field_description)) values (\(transaction.id), '\(transaction.title)', '\(transaction.time)', '\(transaction.description)');"
                 if let transactionDetail = transaction.details {
                     insertTransactionDetailData(transactionId: transaction.id, transactionDetail: transactionDetail)
                 }
                 }
 
             if !database.executeStatements(query) {
-                print("Failed to insert initial data into the database.")
+                print("Failed to insert initial data into the database. data: \(transactions)")
                 print(database.lastError(), database.lastErrorMessage())
             }
 
@@ -123,7 +122,7 @@ class DBManager: NSObject {
             var query = ""
             for transactionDetail in transactionDetail {
 
-                query += "insert into transactionDetail (\(field_id), \(field_transactionId), \(field_name), \(field_quantity), \(field_price)) values ('\(transactionId)\(transactionDetail.name)', '\(transactionId)', '\(transactionDetail.name)', '\(transactionDetail.quantity)', \(transactionDetail.price));"
+                query += "insert or replace into transactionDetail (\(field_id), \(field_transactionId), \(field_name), \(field_quantity), \(field_price)) values ('\(transactionId)\(transactionDetail.name)', '\(transactionId)', '\(transactionDetail.name)', '\(transactionDetail.quantity)', \(transactionDetail.price));"
 
             }
 
