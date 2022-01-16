@@ -28,6 +28,11 @@ class APIManager {
         }
     }
 
+    func deleteTransactions(id: Int) -> Single<[Transaction]> {
+        return delete(id: id).flatMap { (data) -> Single<[Transaction]> in
+            return APIManager.handleDecode([Transaction].self, from: data)
+        }
+    }
 
 
     public enum DecodeError: Error, LocalizedError {
@@ -86,6 +91,26 @@ class APIManager {
                 }
             }
 
+            return Disposables.create()
+        }
+
+    }
+
+    private func delete(id: Int) -> Single<Data?> {
+        return Single<Data?>.create { (singleEvent) -> Disposable in
+
+            Alamofire.Session.default.request(APIManager.host + APIManager.transaction + "/\(id)", method: .delete).responseJSON { (response) in
+                switch response.result {
+                case .success:
+                    print(APIManager.host + APIManager.transaction + "/\(id)")
+                    if let jsonData = response.data , let JSONString = String(data: jsonData, encoding: String.Encoding.utf8) {
+                       print("JSONString = " + JSONString)
+                    }
+                    singleEvent(.success(response.data))
+                case .failure(let error):
+                    singleEvent(.failure(error))
+                }
+            }
             return Disposables.create()
         }
 

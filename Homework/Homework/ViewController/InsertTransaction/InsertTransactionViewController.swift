@@ -63,7 +63,7 @@ class InsertTransactionViewController: UIViewController {
 
     @objc func saveTapped() {
         viewModel.saveTransaction()
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
 
 }

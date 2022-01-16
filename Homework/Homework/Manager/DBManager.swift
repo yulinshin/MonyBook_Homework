@@ -225,4 +225,30 @@ class DBManager: NSObject {
         return transactionDetails
     }
 
+
+    func deleteTransactionData(transactionId: Int) {
+        if openDatabase() {
+            let query = "delete from transactions where \(field_id)=?"
+
+            do {
+                try database.executeUpdate(query, values: [transactionId])
+            }
+            catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    func deleteTransactionDetailData(transactionId: Int) {
+        if openDatabase() {
+            let query = "delete from transactionDetail where \(field_transactionId)=?"
+            do {
+                try database.executeUpdate(query, values: [transactionId])
+            }
+            catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+
 }

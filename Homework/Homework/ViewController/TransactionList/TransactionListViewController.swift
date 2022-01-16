@@ -116,6 +116,11 @@ extension TransactionListViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if let viewObject = viewObject {
             let sectionView = TransactionListSectionView(frame: tableView.rectForHeader(inSection: section), transactionListItemViewObject:  viewObject.sections[section])
+            sectionView.handelDeleteButton = { [weak self] in
+                self?.viewObject?.sections.remove(at: section)
+                self?.tableView.deleteSections([section], with: .fade)
+                self?.viewModel.deleteTransaction(id: viewObject.sections[section].id)
+            }
             return sectionView
         }
         return nil
@@ -127,7 +132,5 @@ extension TransactionListViewController: UITableViewDelegate, UITableViewDataSou
         self.navigationController?.pushViewController(detailVC, animated: true)
 
     }
-
-
 }
 

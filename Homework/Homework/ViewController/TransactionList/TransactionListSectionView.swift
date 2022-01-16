@@ -24,6 +24,19 @@ class TransactionListSectionView: UIView {
         return label
     }()
 
+    private lazy var deleteButton: UIButton = {
+        let btn = UIButton(frame: .zero)
+        btn.setImage(UIImage(systemName: "trash.fill"), for: .normal)
+        btn.addTarget(self, action: #selector(didTapDeleteButton), for: .touchUpInside)
+        return btn
+    }()
+
+    @objc func didTapDeleteButton(){
+        handelDeleteButton?()
+    }
+
+    var handelDeleteButton: (() -> Void)?
+
     init(frame: CGRect, transactionListItemViewObject:TransactionListSectionViewObject) {
         super.init(frame: frame)
 
@@ -32,6 +45,7 @@ class TransactionListSectionView: UIView {
 
         addSubview(titleLabel)
         addSubview(timeLabel)
+        addSubview(deleteButton)
         backgroundColor = UIColor.black
 
         titleLabel.snp.makeConstraints { (make) in
@@ -42,9 +56,15 @@ class TransactionListSectionView: UIView {
 
         timeLabel.snp.makeConstraints { (make) in
             make.top.bottom.equalToSuperview()
-            make.right.equalToSuperview().inset(8)
-            make.width.equalToSuperview().multipliedBy(0.5)
+            make.right.equalTo(deleteButton.snp.left).offset(-8)
         }
+
+        deleteButton.snp.makeConstraints { (make) in
+            make.top.bottom.equalToSuperview()
+            make.left.equalTo(timeLabel.snp.right).offset(8)
+            make.right.equalToSuperview().inset(8)
+        }
+
     }
 
     required init?(coder: NSCoder) {

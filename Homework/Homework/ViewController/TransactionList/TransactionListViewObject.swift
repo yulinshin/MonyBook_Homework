@@ -9,14 +9,14 @@ import Foundation
 
 struct TransactionListViewObject {
     let sum: Int
-    let sections: [TransactionListSectionViewObject]
+    var sections: [TransactionListSectionViewObject]
 }
 
 struct TransactionListSectionViewObject {
     let id: Int
     let title: String
     let time: String; #warning("DOTO: format -> 109/10/01")
-    let cells: [TransactionListCellViewObject]
+    var cells: [TransactionListCellViewObject]
     
 }
 

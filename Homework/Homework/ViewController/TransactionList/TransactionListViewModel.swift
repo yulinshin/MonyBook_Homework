@@ -81,4 +81,14 @@ class TransactionListViewModel {
          dateFormatter.calendar = Calendar(identifier: Calendar.Identifier.republicOfChina)
          return dateFormatter.string(from: date)
      }
+
+    func deleteTransaction(id: Int) {
+        apiManager.deleteTransactions(id: id).subscribe(onSuccess: { transactions in
+            self.dbManager.deleteTransactionData(transactionId: id)
+            self.dbManager.deleteTransactionDetailData(transactionId: id)
+        }, onFailure: { error in
+            print(error)
+        }).disposed(by: disposeBag)
+
+    }
 }
