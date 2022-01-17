@@ -24,11 +24,11 @@ class TransactionDetailViewModel {
             var cells = [TransactionListCellViewObject]()
             if let details = transaction.details {
                 details.forEach { detail in
-                    let cell = TransactionListCellViewObject(name: detail.name, priceWithQuantity: "\(detail.price), \(detail.quantity)")
+                    let cell = TransactionListCellViewObject(name: detail.name, price: detail.price, quantity: detail.quantity)
                     cells.append(cell)
                 }
             }
-            return .init(title: transaction.title, time: "\(transaction.time)", description: transaction.description, cells: cells)
+            return .init(title: transaction.title, time: transaction.time, description: transaction.description, cells: cells)
         }.observe(on: MainScheduler.instance)
     }
 

@@ -62,7 +62,7 @@ class InsertTransactionViewModel {
         details = detailsRelay.asObservable().map({ details in
  var viewObjects = [TransactionListCellViewObject]()
             details.forEach { detail in
-                viewObjects.append(TransactionListCellViewObject(name: detail.name, priceWithQuantity: "\(detail.price) & \(detail.quantity)"))
+                viewObjects.append(TransactionListCellViewObject(name: detail.name, price: detail.price, quantity: detail.quantity))
             }
             return viewObjects
         })

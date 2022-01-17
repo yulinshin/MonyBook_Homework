@@ -34,6 +34,7 @@
 		0DE77A982644FA010068A3CE /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE77A972644FA010068A3CE /* DBManager.swift */; };
 		0DE77A9E2644FB6A0068A3CE /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = 0DE77A9D2644FB6A0068A3CE /* FMDB */; };
 		0DE77AA32644FC930068A3CE /* TransactionListViewObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE77AA22644FC930068A3CE /* TransactionListViewObject.swift */; };
+		620DD63C279500DB0032D6C9 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620DD63B279500DB0032D6C9 /* Extension.swift */; };
 		626432F92792FA48008A27F2 /* InsertTransactionViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626432F82792FA48008A27F2 /* InsertTransactionViewTableViewCell.swift */; };
 		626432FB2792FBFB008A27F2 /* InsertTransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626432FA2792FBFB008A27F2 /* InsertTransactionViewModel.swift */; };
 		626432FF27931941008A27F2 /* InsertTransctionViewTableViewButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626432FE27931941008A27F2 /* InsertTransctionViewTableViewButtonCell.swift */; };
@@ -85,6 +86,7 @@
 		0DE77A922644F8750068A3CE /* TransactionDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailTableViewCell.swift; sourceTree = "<group>"; };
 		0DE77A972644FA010068A3CE /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		0DE77AA22644FC930068A3CE /* TransactionListViewObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListViewObject.swift; sourceTree = "<group>"; };
+		620DD63B279500DB0032D6C9 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		626432F82792FA48008A27F2 /* InsertTransactionViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertTransactionViewTableViewCell.swift; sourceTree = "<group>"; };
 		626432FA2792FBFB008A27F2 /* InsertTransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertTransactionViewModel.swift; sourceTree = "<group>"; };
 		626432FE27931941008A27F2 /* InsertTransctionViewTableViewButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertTransctionViewTableViewButtonCell.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				0D86F2F32643A18800C0F731 /* Assets.xcassets */,
 				0D86F2F52643A18800C0F731 /* LaunchScreen.storyboard */,
 				0D86F2F82643A18800C0F731 /* Info.plist */,
+				620DD63B279500DB0032D6C9 /* Extension.swift */,
 			);
 			path = Homework;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 				0D86F2EF2643A18700C0F731 /* TransactionListViewController.swift in Sources */,
 				0D86F33E2643A91C00C0F731 /* Resolver.swift in Sources */,
 				0D86F2EB2643A18700C0F731 /* AppDelegate.swift in Sources */,
+				620DD63C279500DB0032D6C9 /* Extension.swift in Sources */,
 				0D6E57CD2643AD5200E3E72C /* TransactionListViewModel.swift in Sources */,
 				0D86F2ED2643A18700C0F731 /* SceneDelegate.swift in Sources */,
 				626432F92792FA48008A27F2 /* InsertTransactionViewTableViewCell.swift in Sources */,
