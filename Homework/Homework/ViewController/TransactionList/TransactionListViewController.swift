@@ -17,6 +17,7 @@ class TransactionListViewController: UIViewController {
         let tableView = UITableView(frame: CGRect.zero, style: UITableView.Style.plain)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(TransactionListDetailTableViewCell.self, forCellReuseIdentifier: TransactionListDetailTableViewCell.identifier)
         return tableView
     }()
 
@@ -32,6 +33,8 @@ class TransactionListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initView()
+        setupNavBar()
+        updateData()
     }
 
     private func initView() {
@@ -39,6 +42,45 @@ class TransactionListViewController: UIViewController {
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+    }
+
+    private func setupNavBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Refresh", style: .plain, target: self, action: #selector(refreshTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTapped))
+        navigationItem.backButtonTitle = "Back to list"
+    }
+
+    @objc func refreshTapped() {
+        updateData()
+    }
+
+    @objc func addTapped() {
+
+        let insertVC = InsertTransactionViewController()
+        self.navigationController?.pushViewController(insertVC, animated: true)
+
+    }
+
+   private func updateData(){
+        viewModel.getTransactionListViewObjects().subscribe { result in
+            switch result {
+            case .success(let object):
+
+                self.viewObject = object
+                self.title = "Total: \(object.sum)"
+                self.tableView.reloadData()
+
+            case .failure:
+                self.viewObject =  self.viewModel.getTransactionListViewObjectsFromLocal()
+                if let object = self.viewObject {
+                    self.title = "Total: \(object.sum)"
+                } else {
+                    self.title = "Total: -"
+                }
+
+                self.tableView.reloadData()
+            }
+        }.disposed(by: viewModel.disposeBag)
     }
 
 }
@@ -52,6 +94,7 @@ extension TransactionListViewController: UITableViewDelegate, UITableViewDataSou
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let cellCount = self.viewObject?.sections[section].cells.count ?? 0
+        print(cellCount)
         return cellCount
     }
 
@@ -60,8 +103,10 @@ extension TransactionListViewController: UITableViewDelegate, UITableViewDataSou
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        #warning("DOTO: TransactionListDetailTableViewCell")
-        return .init()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TransactionListDetailTableViewCell.identifier, for: indexPath) as? TransactionListDetailTableViewCell else { return UITableViewCell() }
+        guard let viewObject = viewObject else { return UITableViewCell()}
+        cell.updateView(viewObject.sections[indexPath.section].cells[indexPath.row])
+        return cell
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -69,10 +114,23 @@ extension TransactionListViewController: UITableViewDelegate, UITableViewDataSou
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        #warning("DOTO: TransactionListSectionView")
+        if let viewObject = viewObject {
+            let sectionView = TransactionListSectionView(frame: tableView.rectForHeader(inSection: section), transactionListItemViewObject:  viewObject.sections[section])
+            sectionView.handelDeleteButton = { [weak self] in
+                self?.viewObject?.sections.remove(at: section)
+                self?.tableView.deleteSections([section], with: .fade)
+                self?.viewModel.deleteTransaction(id: viewObject.sections[section].id)
+            }
+            return sectionView
+        }
         return nil
     }
-    
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        let detailVC = TransactionDetailViewController(viewModel: TransactionDetailViewModel(transactionId: viewObject!.sections[indexPath.section].id ))
+        self.navigationController?.pushViewController(detailVC, animated: true)
+
+    }
 }
 

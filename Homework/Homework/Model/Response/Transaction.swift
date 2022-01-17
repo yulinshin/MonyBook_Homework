@@ -27,10 +27,27 @@ struct Transaction: Codable {
         description = try values.decode(String.self, forKey: .description)
         details = try? values.decode([TransactionDetail].self, forKey: .details)
     }
+
+    init(id: Int, time: Int, title: String, description: String, details: [TransactionDetail]) {
+        self.id = id
+        self.time = time
+        self.title = title
+        self.description = description
+        self.details = details
+    }
+
 }
 
 struct TransactionDetail: Codable {
     let name: String
     let quantity: Int
     let price: Int
+
+    init(name: String, quantity: Int, price: Int) {
+        self.name = name
+        self.quantity = quantity
+        self.price = price
+    }
+
+
 }

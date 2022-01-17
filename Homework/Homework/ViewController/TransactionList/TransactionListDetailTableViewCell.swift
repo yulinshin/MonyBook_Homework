@@ -9,6 +9,8 @@ import UIKit
 
 class TransactionListDetailTableViewCell: UITableViewCell {
 
+    static var identifier = "TransactionListDetailTableViewCell"
+
     private lazy var nameLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.numberOfLines = 1
@@ -44,9 +46,9 @@ class TransactionListDetailTableViewCell: UITableViewCell {
     }
 
 
-    func updateView(_ viewOject: TransactionListCellViewObject) {
-        priceLabel.text = viewOject.priceWithQuantity
-        nameLabel.text = viewOject.name
+    func updateView(_ viewOject: TransactionListCellViewObject?) {
+        priceLabel.text = viewOject?.priceWithQuantity
+        nameLabel.text = viewOject?.name
     }
 
 }
